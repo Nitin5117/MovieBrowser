@@ -1,0 +1,177 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 20px;
+  padding: 24px 16px;
+  background-color: rgb(34, 1, 1);
+  color: #fffdfd;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Page Load Animations --- */
+@keyframes slideDown {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+header {
+  width: min(100%, 430px);
+  margin: 0;
+  padding: 18px 24px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8b0000, #d62828);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  color: #fffdfd;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  
+  /* Added slide-down animation */
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+main {
+  width: min(100%, 430px);
+}
+
+.auth-form {
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background-color: rgb(62, 51, 51);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  
+  /* Added bouncy float-up animation (slightly delayed so it follows the header) */
+  animation: floatUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
+  opacity: 0; /* Starts invisible for the animation */
+}
+
+.auth-form form p {
+  margin: 0 0 18px;
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 6px;
+  color: #ffe3e3;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 7px;
+  outline: none;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font: inherit;
+  
+  /* Added smooth transitions for focus state */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.auth-form input:focus {
+  border-color: #ff9a9a;
+  box-shadow: 0 0 0 3px rgba(255, 154, 154, 0.2);
+  background: rgba(0, 0, 0, 0.4); /* Darkens slightly on focus */
+}
+
+.auth-form .helptext,
+.auth-form ul {
+  display: block;
+  margin: 7px 0 0;
+  color: #f4c6c6;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.auth-form ul {
+  padding-left: 18px;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 11px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 7px;
+  background: linear-gradient(135deg, #a80c0c, #d62828);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  
+  /* Added transition for bouncy hover/active states */
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.auth-form button:hover {
+  background: linear-gradient(135deg, #c81717, #eb3b3b);
+  transform: translateY(-2px) scale(1.02); /* Pops up and grows slightly */
+  box-shadow: 0 6px 15px rgba(214, 40, 40, 0.4); /* Adds a red glow */
+}
+
+.auth-form button:active {
+  transform: translateY(1px) scale(0.98); /* Clicks down */
+  box-shadow: 0 2px 5px rgba(214, 40, 40, 0.4);
+}
+
+.auth-form > p {
+  margin: 20px 0 0;
+  color: #ffe3e3;
+  text-align: center;
+}
+
+.auth-form a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none; /* Removed underline for cleaner look */
+  border-bottom: 1px solid transparent;
+  
+  /* Added color and border transition */
+  transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.auth-form a:hover {
+  color: #ff9a9a;
+  border-color: #ff9a9a;
+  text-shadow: 0 0 8px rgba(255, 154, 154, 0.5); /* Subtle text glow */
+}
+
+.errorlist {
+  margin: -8px 0 10px !important;
+  padding-left: 18px;
+  color: #ffb3b3 !important;
+  
+  /* Make errors shake slightly to grab attention */
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@media (max-width: 420px) {
+  .auth-form {
+    padding: 22px 18px;
+  }
+}
