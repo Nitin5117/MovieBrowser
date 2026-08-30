@@ -1,0 +1,178 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #141414; 
+  color: #ffffff;
+  padding: 30px 20px;
+  line-height: 1.6;
+}
+
+.back-button {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #FF7F7F;
+  border-bottom: 2px solid #FF7F7F;
+  padding-bottom: 8px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  gap : 40px;
+  padding: 60px 5%;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  min-height: 500px;
+  box-shadow: inset 0 -100px 50px -50px #141414;
+}
+
+.poster {
+  flex: 0 0 280px;
+  height: 420px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.content {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: flex-start; 
+  gap: 15px;
+}
+
+.content h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 5px;
+}
+
+.tags span {
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.overview {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #cfcdcd;
+  width: 100%;
+  text-align: left;
+  margin: 0;
+}
+
+/* Updated from .cast-grid to match your HTML container */
+.cast-list {
+  display : flex;
+  gap: 20px;
+  margin-top: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+.cast-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cast-list::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+.cast-card {
+  background-color: transparent;
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 140px; 
+  transition: transform 0.2s ease-in-out;
+}
+
+.cast-card:hover {
+  transform: translateY(-5px);
+}
+
+.cast-card img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  border: 2px solid transparent;
+  transition: border 0.3s ease;
+  background-color: #333333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.cast-card:hover img {
+  border: 2px solid #ffffff;
+}
+
+.cast-card p {
+  margin: 2px 0;
+  line-height: 1.2;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cast-card strong {
+  color: #ffffff;
+  font-size: 1rem;
+  display: block;
+}
+
+.character-name {
+  color: #aaaaaa;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.cast-popularity {
+  color: #FF7F7F;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
