@@ -4,7 +4,6 @@ A full-stack Django web application that ingests movie data from an external API
 
 **🔗 Live Demo:** [https://moviebrowser-1.onrender.com](https://moviebrowser-1.onrender.com)
 
-**📂 Source Code:** [github.com/Nitin5117/MovieBrowser/tree/main/TASK3](https://github.com/Nitin5117/MovieBrowser/tree/main/TASK3)
 
 ---
 
