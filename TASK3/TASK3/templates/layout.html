@@ -62,6 +62,11 @@
       </nav>
 
     </header>
+    {% if messages %}
+      {% for message in messages %}
+        <p class="message {{ message.tags }}">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
     {% block content %}
     {% endblock %}
     <script src = {% static 'layout.js' %}> </script>

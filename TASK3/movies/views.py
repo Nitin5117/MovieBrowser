@@ -3,11 +3,11 @@ from pathlib import Path
 
 import requests
 from dotenv import load_dotenv
-from django.http import HttpResponse
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from django.core.paginator import Paginator #to seperate data into different different pages
 
@@ -19,11 +19,22 @@ load_dotenv(BASE_DIR / ".env")
 API_BASE_URL = os.getenv("API_URL")
 
 def dataBase(request):
+  if not API_BASE_URL:
+    messages.error(request, "Movie API URL is not configured.")
+    return redirect('home')
+
   current_page = request.session.get('last_fetched_api_page',0)
   next_page = current_page + 1
   API_URL = f"{API_BASE_URL}{next_page}"
   try:
-    response = requests.get(API_URL)
+    response = requests.get(
+        API_URL,
+        headers={
+            'Accept': 'application/json',
+            'User-Agent': 'MovieBrowser/1.0',
+        },
+        timeout=15,
+    )
     response.raise_for_status()
     data = response.json().get('data', [])
 
@@ -65,8 +76,20 @@ def dataBase(request):
           movie.casts.add(cast_obj)
     request.session['last_fetched_api_page'] = next_page
     return redirect('home')
+  except requests.HTTPError as e:
+      status_code = e.response.status_code if e.response is not None else None
+      if status_code == 403:
+          messages.error(
+              request,
+              "The movie provider temporarily refused this request (HTTP 403). "
+              "Please wait a moment and try loading movies again.",
+          )
+      else:
+          messages.error(request, f"The movie provider returned HTTP {status_code}.")
+      return redirect('home')
   except requests.RequestException as e:
-      return HttpResponse(f"Failed to fetch API: {e}")
+      messages.error(request, "Could not reach the movie provider. Please try again later.")
+      return redirect('home')
       
 def home(request):
     
