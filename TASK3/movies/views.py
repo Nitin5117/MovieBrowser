@@ -1,4 +1,5 @@
 import os
+import logging
 from pathlib import Path
 
 import requests
@@ -12,6 +13,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator #to seperate data into different different pages
 
 from .models import Movie,Cast
+
+logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".ENV")
@@ -31,7 +34,12 @@ def dataBase(request):
         API_URL,
         headers={
             'Accept': 'application/json',
-            'User-Agent': 'MovieBrowser/1.0',
+            'Referer': 'https://jsonfakery.com/',
+            'User-Agent': (
+                'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+                'AppleWebKit/537.36 (KHTML, like Gecko) '
+                'Chrome/131.0.0.0 Safari/537.36'
+            ),
         },
         timeout=15,
     )
@@ -78,11 +86,16 @@ def dataBase(request):
     return redirect('home')
   except requests.HTTPError as e:
       status_code = e.response.status_code if e.response is not None else None
+      logger.warning(
+          "Movie API request failed: page=%s status=%s",
+          next_page,
+          status_code,
+      )
       if status_code == 403:
           messages.error(
               request,
-              "The movie provider temporarily refused this request (HTTP 403). "
-              "Please wait a moment and try loading movies again.",
+              f"The movie provider refused page {next_page} (HTTP 403). "
+              "Please try again later.",
           )
       else:
           messages.error(request, f"The movie provider returned HTTP {status_code}.")
